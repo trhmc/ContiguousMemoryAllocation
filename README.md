@@ -1,6 +1,6 @@
 # ContiguousMemoryAllocation
 ## Initalized memory allocation
-	Max array size and size of memory (example ./allocator 5 10000)
+	Max array size (example ```./allocator 5```)
 
 Process class:
 - memory size
@@ -32,17 +32,22 @@ Status report will only show the status base on the processes (if there's any ac
 
 ## How to run program:
 - Compile program
+```
 	g++ -o alloc Allocator.cpp
+```
 - Running program
+```
 	./alloc 3
+```
 (Here the program is initialized with 3 blocks of memory, user will input size of each block)
 - Function examples:
+```
 	RQ P0 150 W
 	STAT
 	RL P0
 	STAT
 	C
 	Exit
-
+```
 ### reference source:
 https://www.geeksforgeeks.org/implementation-of-all-partition-allocation-methods-in-memory-management/
