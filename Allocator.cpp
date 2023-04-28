@@ -25,6 +25,7 @@ public:
     pid_t mid;
     vector<process> space_occupied;
 
+    // pushing a process into the block
     void push(const process p) {
         if (p.size <= size) {
             space_occupied.push_back(p);
@@ -32,6 +33,7 @@ public:
         }
     }
 
+    // popping a process out of the block
     void pop(const process p) {
         vector<process> temp;
         int i;
@@ -87,7 +89,7 @@ vector<memory> best_fit(vector<memory> memory_blocks, process p) {
 }
 
 vector<memory> worst_fit(vector<memory> memory_blocks, process p) {
-    // Finding largest memory block to fit the process
+    // Finding largest possible memory block to fit the process
     int i, index;
     int max = 0;
     for (i = 0; i < memory_blocks.size(); i++) {
@@ -143,22 +145,24 @@ vector<memory> compact(vector<memory> memory_blocks) {
     chunk_block.size = 0;
     vector<memory> result;
     for (int i = 0; i < memory_blocks.size(); i++) {
-        // do something if it is not empty and size is != 0
-        if ((!memory_blocks.at(i).empty()) && (memory_blocks.at(i).size != 0)) {
+        // adding to chunk_block size and remove size of occupied memory blocks
+        if (!memory_blocks.at(i).empty()) {
             chunk_block.size += memory_blocks.at(i).size;
             memory_blocks.at(i).size = 0;
+            memory_blocks.at(i).mid = result.size();
             result.push_back(memory_blocks.at(i));
         }
     }
     for (int i = 0; i < memory_blocks.size(); i++) {
-        // do something if the memory block is empty
+        // only adding to chunk_block size of empty memory blocks
         if (memory_blocks.at(i).empty()) {
             chunk_block.size += memory_blocks.at(i).size;
         }
     }
     // adding the 'chunk to the new memory block
-    chunk_block.mid = result.size() - 1;
+    chunk_block.mid = result.size();
     result.push_back(chunk_block);
+    cout << "after compaction size: " << result.size() << endl;
     return result;
 }
 
@@ -224,7 +228,6 @@ int main(int argc, char *argv[]) {
     // argv should have size 2:
     // argv[0]: name of program
     // argv[1]: MAX memory blocks array size
-    // argv[2]: total memory size of memory blocks
     int i;
     if (argc != 2) {
         cout << "Argument Invalid" << endl;
