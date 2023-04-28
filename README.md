@@ -1,6 +1,8 @@
 # ContiguousMemoryAllocation
 ## Initalized memory allocation
-	Max array size (example ```./allocator 5```)
+Max array size
+Example:
+```./allocator 5```
 
 Process class:
 - memory size
