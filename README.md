@@ -26,5 +26,7 @@ memory_block class:
 main:
 - help menu of function
 
+## Assumptions
+Status report will only show the status base on the processes (if there's any active on the system)
 reference source:
 https://www.geeksforgeeks.org/implementation-of-all-partition-allocation-methods-in-memory-management/

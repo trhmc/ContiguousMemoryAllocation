@@ -155,14 +155,14 @@ void status(vector<memory> memory_blocks, vector<process> processes) {
             << endl;
     for (i = 0; i < processes.size(); i++) {
         process p = processes.at(i);
-        pid_t p_mem;
+        string p_mem;
         bool p_in_mem = false;
         // find the process in the memory blocks
         for (j = 0; j < memory_blocks.size(); j++) {
             vector<process> block = memory_blocks.at(j).space_occupied;
             for (int k = 0; k < block.size(); k++) {
                 if (block.at(k).pid == p.pid) {
-                    p_mem = memory_blocks.at(j).mid;
+                    p_mem = to_string(memory_blocks.at(j).mid);
                     p_in_mem = true;
                 }
 
@@ -170,19 +170,17 @@ void status(vector<memory> memory_blocks, vector<process> processes) {
         }
         temp = p.pid.length();
         cout << "|" << string(7 - temp / 2 - temp % 2, ' ')
-             << p.pid << string(6 - temp / 2, ' ') << "|";
+             << p.pid << string(6 - temp / 2, ' ');
 
         temp = to_string(p.size).length();
         cout << "|" << string(7 - temp / 2 - temp % 2, ' ')
-             << p.size << string(6 - temp / 2, ' ') << "|";
-
-        if (p_in_mem) {
-            cout << p_mem;
+             << p.size << string(7 - temp / 2, ' ');
+        if (!p_in_mem) {
+            p_mem = "N/A";
         }
-        else {
-            cout << "N/A";
-        }
-        cout << string(7 - temp / 2, ' ') << "|" << endl;
+        temp = p_mem.length();
+        cout << "|" << string(7 - temp / 2 - temp % 2, ' ')
+             << p_mem << string(7 - temp / 2, ' ') << "|" << endl;
 
     }
     cout << "+-------------+--------------+--------------+"
@@ -235,8 +233,8 @@ int main(int argc, char *argv[]) {
             char opt = inputs[3][0];
             memory_blocks = request(memory_blocks, p, opt);
             processes.push_back(p);
-            cout << processes.size();
-            cout << "This is a request" << endl;
+            // cout << processes.size();
+            // cout << "This is a request" << endl;
         }
         else if (inputs[0] == "RL") {
             process p;
@@ -252,14 +250,14 @@ int main(int argc, char *argv[]) {
                 memory_blocks = release(memory_blocks, p);
                 processes = pop(processes, p);
             }
-            cout << "This is a release" << endl;
+            // cout << "This is a release" << endl;
         }
         else if (inputs[0] == "C") {
-            cout << "This is a compaction" << endl;
+            // cout << "This is a compaction" << endl;
         }
         else if (inputs[0] == "STAT") {
             status(memory_blocks, processes);
-            cout << "This is a status report" << endl;
+            // cout << "This is a status report" << endl;
         }
         else if (inputs[0] == "Exit") {
             cout << "Exiting program..." << endl;
