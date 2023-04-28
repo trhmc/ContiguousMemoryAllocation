@@ -137,10 +137,29 @@ vector<memory> release(vector<memory> memory_blocks, process p) {
     return memory_blocks;
 }
 
-void compact(vector<memory> memory_blocks) {
+vector<memory> compact(vector<memory> memory_blocks) {
     // compacting free memory blocks into one big chunk
-
-
+    memory chunk_block;
+    chunk_block.size = 0;
+    vector<memory> result;
+    for (int i = 0; i < memory_blocks.size(); i++) {
+        // do something if it is not empty and size is != 0
+        if ((!memory_blocks.at(i).empty()) && (memory_blocks.at(i).size != 0)) {
+            chunk_block.size += memory_blocks.at(i).size;
+            memory_blocks.at(i).size = 0;
+            result.push_back(memory_blocks.at(i));
+        }
+    }
+    for (int i = 0; i < memory_blocks.size(); i++) {
+        // do something if the memory block is empty
+        if (memory_blocks.at(i).empty()) {
+            chunk_block.size += memory_blocks.at(i).size;
+        }
+    }
+    // adding the 'chunk to the new memory block
+    chunk_block.mid = result.size() - 1;
+    result.push_back(chunk_block);
+    return result;
 }
 
 void status(vector<memory> memory_blocks, vector<process> processes) {
@@ -253,6 +272,7 @@ int main(int argc, char *argv[]) {
             // cout << "This is a release" << endl;
         }
         else if (inputs[0] == "C") {
+            memory_blocks = compact(memory_blocks);
             // cout << "This is a compaction" << endl;
         }
         else if (inputs[0] == "STAT") {

@@ -15,11 +15,11 @@ memory_block class:
 - bool empty: checking of a block is empty or not
 
 ## 4 essential functions:
-1. RQ <process> <memory size> <strategy> - request for a contiguous block of memory
+1. RQ [process] [memory size] [strategy] - request for a contiguous block of memory
 	- W - worst fit, fitting largest block of memory possible to process
 	- B - best fit, fitting closest size block of memory possible to process
 	- F - first fit, fitting first block of memory of equal or larger size to process
-2. RL <process> - release of a contiguous block of memory
+2. RL [process] - release of a contiguous block of memory
 3. C - compact unused holes of memory into one single block
 4. STAT - report regions of free and allocated memory
 
