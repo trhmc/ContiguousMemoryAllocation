@@ -26,9 +26,6 @@ memory_block class:
 4. STAT - report regions of free and allocated memory
 5. Exit - exit the program
 
-main:
-- help menu of function
-
 ## Assumptions
 Status report will only show the status base on the processes (if there's any active on the system)
 
