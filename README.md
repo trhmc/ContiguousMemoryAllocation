@@ -25,3 +25,6 @@ memory_block class:
 
 main:
 - help menu of function
+
+reference source:
+https://www.geeksforgeeks.org/implementation-of-all-partition-allocation-methods-in-memory-management/
