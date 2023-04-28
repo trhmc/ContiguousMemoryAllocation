@@ -22,12 +22,27 @@ memory_block class:
 2. RL [process] - release of a contiguous block of memory
 3. C - compact unused holes of memory into one single block
 4. STAT - report regions of free and allocated memory
+5. Exit - exit the program
 
 main:
 - help menu of function
 
 ## Assumptions
 Status report will only show the status base on the processes (if there's any active on the system)
+
+## How to run program:
+- Compile program
+	g++ -o alloc Allocator.cpp
+- Running program
+	./alloc 3
+(Here the program is initialized with 3 blocks of memory, user will input size of each block)
+- Function examples:
+	RQ P0 150 W
+	STAT
+	RL P0
+	STAT
+	C
+	Exit
 
 ### reference source:
 https://www.geeksforgeeks.org/implementation-of-all-partition-allocation-methods-in-memory-management/
